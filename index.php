@@ -32,12 +32,32 @@ $f3->route('GET /', function() {
 });
 
 
-//survey route
+//Survey route
 $f3->route('GET|POST /survey', function($f3){
     //echo '<h1>Hello out there</h1>';
 
     //Create an array of checkbox options
     $surveyOptions = array("This midterm is easy", "I like midterms", "Today is Monday");
+
+    //If the form has been submitted
+    if($_SERVER["REQUEST_METHOD"]=="POST") {
+        //var_dump($_POST);
+
+        //validate the data
+
+        //data is valid
+
+            //Store the data in the session array - b/c this form is posting to self, and you don't want to lose data
+            // when you go to the summary page
+            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['surveyOptions'] = $_POST['surveyOptions'];
+
+            //Redirect to summary page
+            $f3->reroute('summary');
+
+
+
+    }
 
     //add surveyOptions array to hive
     $f3->set('surveyOptions', $surveyOptions);
@@ -47,7 +67,16 @@ $f3->route('GET|POST /survey', function($f3){
 
 });
 
+//Summary route
+$f3->route('GET /summary', function() {
+    //echo '<h1>Welcome to my summary</h1>';
 
+    $view = new Template();
+    echo $view->render('views/summary.html');
+
+    session_destroy();
+
+});
 
 
 //Run fat free
