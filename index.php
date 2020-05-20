@@ -31,114 +31,24 @@ $f3->route('GET /', function() {
 
 });
 
-/*
+
 //survey route
-$f3->route('GET|POST /PersonalInformation', function($f3){
+$f3->route('GET|POST /survey', function($f3){
     //echo '<h1>Hello out there</h1>';
 
+    //Create an array of checkbox options
+    $surveyOptions = array("This midterm is easy", "I like midterms", "Today is Monday");
 
-    //If the form has been submitted
-    if($_SERVER["REQUEST_METHOD"]=="POST") {
-        //var_dump($_POST);
-
-        //validate data - ADD LATER
-
-        //data is valid
-        //Store the data in the session array
-        $_SESSION['firstName'] = $_POST['firstName'];
-        $_SESSION['lastName'] = $_POST['lastName'];
-        $_SESSION['age'] = $_POST['age'];
-        $_SESSION['gender'] = $_POST['gender'];
-        $_SESSION['phone'] = $_POST['phone'];
-
-        //var_dump($_SESSION);
-
-        //Redirect to summary page
-        $f3->reroute('profile');
-
-    }
-
+    //add surveyOptions array to hive
+    $f3->set('surveyOptions', $surveyOptions);
 
     $view = new Template();
-    echo $view->render("views/personal_info.html");
+    echo $view->render("views/survey.html");
 
 });
 
 
-//Profile route
-$f3->route('GET|POST /Profile', function($f3){
-    //echo '<h1>Hello out there</h1>';
 
-    //add states array to hive
-    $f3->set('states', getStates());
-
-    //If the form has been submitted
-    if($_SERVER["REQUEST_METHOD"]=="POST") {
-        //var_dump($_POST);
-
-        //validate data - ADD LATER
-
-        //data is valid
-        //Store the data in the session array
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['state'] = $_POST['state'];
-        $_SESSION['seeking'] = $_POST['seeking'];
-        $_SESSION['bio'] = $_POST['bio'];
-
-        //var_dump($_SESSION);
-
-        //Redirect to summary page
-        $f3->reroute('interests');
-
-    }
-
-
-    $view = new Template();
-    echo $view->render("views/profile.html");
-
-});
-
-//Interests route
-$f3->route('GET|POST /Interests', function($f3){
-    //echo '<h1>Hello out there</h1>';
-
-
-    //If the form has been submitted
-    if($_SERVER["REQUEST_METHOD"]=="POST") {
-        //var_dump($_POST);
-
-        //validate data - ADD LATER
-
-        //data is valid
-        //Store the data in the session array
-        $_SESSION['indoor'] = $_POST['indoor'];
-        $_SESSION['outdoor'] = $_POST['outdoor'];
-
-        //var_dump($_SESSION);
-
-        //Redirect to summary page
-        $f3->reroute('profileSummary');
-
-    }
-
-
-    $view = new Template();
-    echo $view->render("views/interests.html");
-
-});
-
-
-//Profile Summary route
-$f3->route('GET|POST /ProfileSummary', function($f3){
-    //echo '<h1>Hello out there</h1>';
-
-    $view = new Template();
-    echo $view->render("views/profile_summary.html");
-
-    session_destroy();
-
-});
-*/
 
 //Run fat free
 $f3->run();
