@@ -44,9 +44,16 @@ $f3->route('GET|POST /survey', function($f3){
         //var_dump($_POST);
 
         //validate the data
-
+        if(empty($_POST['name']) || !isset($_POST['surveyOptions'])) {
+            if (empty($_POST['name'])) {
+                $f3->set("errors['name']", "Please enter your name.");
+            }
+            if (!isset($_POST['surveyOptions'])) {
+                $f3->set("errors['surveyOptions']", "Please check at least one box.");
+            }
+        }
         //data is valid
-
+        else {
             //Store the data in the session array - b/c this form is posting to self, and you don't want to lose data
             // when you go to the summary page
             $_SESSION['name'] = $_POST['name'];
@@ -54,7 +61,7 @@ $f3->route('GET|POST /survey', function($f3){
 
             //Redirect to summary page
             $f3->reroute('summary');
-
+        }
 
 
     }

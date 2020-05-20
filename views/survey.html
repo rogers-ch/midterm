@@ -28,6 +28,11 @@
         <div class="form-group row form-inline px-3">
             <label class="pr-2" for="name">Name</label>
             <input class="form-control" type="text" name="name" id="name">
+            <span class="text-danger pl-2">
+                <check if="{{ isset(@errors['name']) }}">
+                    {{ @errors['name'] }}
+                </check>
+            </span>
 
         </div>
 
@@ -47,6 +52,11 @@
                     </div>
 
                 </repeat>
+                <span class="text-danger">
+                    <check if="{{ isset(@errors['surveyOptions']) }}">
+                        {{ @errors['surveyOptions'] }}
+                    </check>
+                </span>
             </div>
 
         </div>
