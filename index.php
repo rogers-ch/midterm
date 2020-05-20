@@ -66,6 +66,10 @@ $f3->route('GET|POST /survey', function($f3){
 
     }
 
+    //Create hive variables for user input to make forms sticky
+    $f3->set('providedName', $_POST['name']);
+    $f3->set('selectedOptions', $_POST['surveyOptions']);
+
     //add surveyOptions array to hive
     $f3->set('surveyOptions', $surveyOptions);
 
